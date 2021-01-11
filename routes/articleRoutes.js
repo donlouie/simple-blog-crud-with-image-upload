@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const catchAsync = require('../utils/catchAsync');
 
 const Article = require('../models/articleModel');
 
@@ -20,34 +21,32 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 //* add event handle
-// TODO: FIX MULTER IMAGE UPLOAD
 router.post(
   '/create',
-  upload.fields([{ name: 'imageCover', maxCount: 1 }]),
-  (req, res) => {
-    const obj = {
-      articleAuthor: req.body.articleAuthor,
-      articleTitle: req.body.articleTitle,
-      articleContent: req.body.articleContent,
+  upload.fields([{ name: 'image', maxCount: 1 }]),
+  catchAsync(async (req, res, next) => {
+    const article = {
+      articleAuthor: req.body.author,
+      articleTitle: req.body.title,
+      articleContent: req.body.content,
       imageCover: {
         data: fs.readFileSync(
           path.join(
-            __dirname +
-              '/../public/uploads/' +
-              req.files['imageCover'][0].filename
+            __dirname + '/../public/uploads/' + req.files['image'][0].filename
           )
         ),
         contentType: 'image',
       },
     };
-    Article.create(obj, (err, article) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(article);
-      }
+    const doc = await Article.create(article);
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        data: doc,
+      },
     });
-  }
+  })
 );
 
 module.exports = router;
