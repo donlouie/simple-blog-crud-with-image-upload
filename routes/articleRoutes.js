@@ -7,6 +7,7 @@ const Article = require('../models/articleModel');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
+const AppError = require('../utils/appError');
 
 //* multer storage
 const storage = multer.diskStorage({
@@ -20,7 +21,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-//* add event handle
+//* add article
 router.post(
   '/create',
   upload.fields([{ name: 'image', maxCount: 1 }]),
@@ -45,6 +46,25 @@ router.post(
       data: {
         data: doc,
       },
+    });
+  })
+);
+
+//* delete article
+router.delete(
+  '/delete/:id',
+  catchAsync(async (req, res, next) => {
+    // const btnDelete = req.body.btnDelete;
+
+    const doc = await Article.findByIdAndDelete(req.params.id);
+
+    if (!doc) {
+      return next(new AppError('No document found with that ID', 404));
+    }
+
+    res.status(204).json({
+      status: 'success',
+      data: null,
     });
   })
 );
