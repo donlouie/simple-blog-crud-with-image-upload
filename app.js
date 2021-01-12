@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const AppError = require('./utils/appError');
+const indexRouter = require('./routes/indexRoutes');
 const articleRouter = require('./routes/articleRoutes');
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 // routes
+app.use('/', indexRouter);
 app.use('/api/articles', articleRouter);
 
 app.all('*', (req, res, next) => {
