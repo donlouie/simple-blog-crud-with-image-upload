@@ -36,7 +36,8 @@ router.post(
             __dirname + '/../public/uploads/' + req.files['image'][0].filename
           )
         ),
-        contentType: 'image',
+        //? why is contentType not showing on mongoDB json object
+        contentType: 'image', 
       },
     };
     const doc = await Article.create(article);
