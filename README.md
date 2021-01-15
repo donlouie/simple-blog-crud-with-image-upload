@@ -16,6 +16,7 @@ Just a simple blog website where you can view articles created using the content
 * MongoDB/Mongoose
 
 ## 🔍 Website Preview
+![Imgur](https://i.imgur.com/Ckd0Gfv.png)
 
 ## Website Features
 
