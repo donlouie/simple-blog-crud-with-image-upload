@@ -5,6 +5,7 @@
 ## ❔ About
 
 Just a simple blog website where you can read and manage articles created on the admin panel.
+//Site currently unfinished
 
 ## 🏗️ Built With
 
@@ -18,14 +19,17 @@ Just a simple blog website where you can read and manage articles created on the
 
 ## 🔍 Website Preview
 
-![Imgur](https://i.imgur.com/tlmVbr7.png)
-
 ## Website Features
 
 Content Management
 
 - Create, Read, Update, Delete content
 - Manage Blog Articles
+
+User Authentication
+
+-Passportjs & Bcrypt
+//followed bradtraversy's authentication
 
 ## Installing
 
