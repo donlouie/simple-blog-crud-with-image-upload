@@ -1,0 +1,129 @@
+<%- include("partials/header.ejs"); -%>
+<!-- Add Article -->
+<div id="section" class="container">
+    <form
+    action="/api/articles/create"
+    method="post"
+    enctype="multipart/form-data"
+    autocomplete="off"
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-lg-6">
+          <div>
+            <form class="md-form">
+              <div class="file-field">
+                  <img id="image" class="img-responsive fit-image"/>
+                <div class="d-flex justify-content-center">
+                  <div class="btn btn-mdb-color btn-rounded float-left">
+                    <input type="file"  id="image" name="image" accept="image/*" onchange="loadFile(event)" required />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      <div class="col-sm-6 col-lg-6"> 
+      <div>
+        <input
+          class="form-control"
+          type="text"
+          id="author"
+          value=""
+          name="author"
+          placeholder="Author/Writer"
+          required
+        />
+      </div>
+      <div>
+        <input
+          class="form-control"
+          type="text"
+          id="title"
+          value=""
+          name="title"
+          placeholder="Title"
+          required
+        />
+      </div>
+      <div>
+        <textarea
+          class="form-control"
+          id="content"
+          name="content"
+          value=""
+          rows="4"
+          placeholder="Content Here..."
+          required
+        ></textarea>
+      </div>
+      <div>
+        <br />
+        <button class="btn btn-dark" type="submit"><i class="far fa-plus-square"> Add Article</i></button>
+      </div>
+    </div> 
+    </div>
+  </form>
+</div>
+<!-- /Add Article -->
+
+<!-- Article Table -->
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <br />
+        <div class="table-responsive">
+          <table id="mytable" class="table table-bordred table-striped table-sm table-light">
+            <thead>
+              <th>Photo</th>
+              <th>Author</th>
+              <th>Title</th>
+              <th>Published At</th>
+              <th>Delete</th>
+            </thead>
+            <tbody>
+              <% articleList.reverse().forEach(function(article) { %>
+              <tr>
+                <td>
+                  <img
+                    class="img-responsive"
+                    width="100"
+                    src="data:image/<%=article.imageCover.contentType%>;base64, 
+                     <%=article.imageCover.data.toString('base64')%>"
+                  />
+                </td>
+                <td><%= article.articleAuthor %></td>
+                <td><%= article.articleTitle %></td>
+                <td><%= article.publishedAt %></td>
+                <td>
+                  <form action="/api/articles/delete" method="post">
+                  <button
+                  name="delbutton"
+                  value="<%= article._id %>"
+                  class="btn btn-dark btn-xs"
+                  onclick="this.form.submit()"
+                >
+                <span><i class="far fa-trash-alt"></i></span>
+              </button>         
+            </form>
+          </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- /Article Table -->
+
+<script>
+    var loadFile = function (event) {
+      var output = document.getElementById("image");
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function () {
+        URL.revokeObjectURL(output.src); // free memory
+      };
+    };
+</script>
+<%- include("partials/footer.ejs"); -%>

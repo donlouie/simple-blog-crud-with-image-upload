@@ -6,14 +6,12 @@ const AppError = require('../utils/appError');
 const Article = require('../models/articleModel');
 
 //* render index route, display index.js ejs template
-//TODO: CREATE ARTICLE VIEW TEMPLATE
 //? Why do we live just to suffer?
 router.get(
   '/',
   catchAsync(async (req, res, next) => {
     await Article.find({}, (err, doc) => {
-      if (doc.length === 0) {
-        //TODO: ENABLE DISPLAY WITH EMPTY CONTENT
+      if (!doc) {
         return next(new AppError('No documents found in the database', 404));
       }
 

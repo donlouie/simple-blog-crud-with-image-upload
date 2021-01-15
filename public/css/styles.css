@@ -6,7 +6,7 @@
   font-family: 'Archivo Black', sans-serif;
 }
 
-#article-section {
+#section {
   margin-top: 100px;
 }
 #article-card {
@@ -27,6 +27,12 @@ p {
 
 a {
   color: rgb(0, 0, 0);
+}
+
+.fit-image {
+  width: 100%;
+  object-fit: cover;
+  height: 185px; /* only if you want fixed height */
 }
 
 @media only screen and (max-width: 900px) {

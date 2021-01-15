@@ -21,6 +21,21 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+//* render article management route
+router.get(
+  '/',
+  catchAsync(async (req, res, next) => {
+    await Article.find({}, (err, doc) => {
+      if (!doc) {
+        return next(new AppError('No documents found in the database', 404));
+      }
+
+      res.status(200).render('manage', { articleList: doc });
+      // console.log(doc);
+    });
+  })
+);
+
 //* add article
 router.post(
   '/create',
@@ -37,36 +52,36 @@ router.post(
           )
         ),
         //? why is contentType not showing on mongoDB json object
-        contentType: 'image', 
+        contentType: 'image',
       },
     };
     const doc = await Article.create(article);
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        data: doc,
-      },
-    });
+    res.status(201).redirect('/api/articles');
+    // json({
+    //   status: 'success',
+    //   data: {
+    //     data: doc,
+    //   },
+    // });
   })
 );
 
 //* delete article
-router.delete(
-  '/delete/:id',
+router.post(
+  '/delete',
   catchAsync(async (req, res, next) => {
-    // const btnDelete = req.body.btnDelete;
-
-    const doc = await Article.findByIdAndDelete(req.params.id);
+    const doc = await Article.findByIdAndRemove(req.body.delbutton);
 
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
     }
 
-    res.status(204).json({
-      status: 'success',
-      data: null,
-    });
+    res.status(204).redirect('/api/articles');
+    // json({
+    //   status: 'success',
+    //   data: null,
+    // });
   })
 );
 
