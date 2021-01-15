@@ -1,32 +1,35 @@
 # mongodb-nodejs-express-blogsite
-📰 Simple blog website 
 
-## ❔ About 
+📰 Simple blog website
 
-Just a simple blog website where you can view articles created using the content management for the creation of articles.
+## ❔ About
+
+Just a simple blog website where you can read articles created on the admin panel.
 
 ## 🏗️ Built With
 
-* HTML 
-* CSS/Bootstrap
-* Javascript
-* NodeJs
-* Express
-* EJS Templates
-* MongoDB/Mongoose
+- HTML
+- CSS/Bootstrap
+- Javascript
+- NodeJs
+- Express
+- EJS Templates
+- MongoDB/Mongoose
 
 ## 🔍 Website Preview
+
 ![Imgur](https://i.imgur.com/Ckd0Gfv.png)
 
 ## Website Features
 
 Content Management
-* Create, Read, Update, Delete content
-* Manage Blog Articles
+
+- Create, Read, Update, Delete content
+- Manage Blog Articles
 
 User authentication
-* Authentication using Passportjs
 
+- Authentication using Passportjs
 
 ## Installing
 
@@ -52,4 +55,4 @@ In this project I created a config.env file that contained my database key
 
 ## 🧔 Authors
 
-* **Louie** - *Initial work* 
+- **Louie** - _Initial work_
