@@ -23,8 +23,8 @@ Content Management
 * Create, Read, Update, Delete content
 * Manage Blog Articles
 
-Passportjs
-* User authentication
+User authentication
+* Authentication using Passportjs
 
 
 ## Installing
