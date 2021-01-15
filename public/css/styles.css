@@ -1,0 +1,36 @@
+.navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.nav-item {
+  font-family: 'Archivo Black', sans-serif;
+}
+
+#article-section {
+  margin-top: 100px;
+}
+#article-card {
+  margin: 0px 290px 45px 290px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+}
+
+h6 {
+  color: rgb(170, 170, 170);
+}
+
+p {
+  font-family: 'Chivo', sans-serif;
+}
+
+a {
+  color: rgb(0, 0, 0);
+}
+
+@media only screen and (max-width: 900px) {
+  #article-card {
+    margin: 0px 50px 45px 50px;
+  }
+}
