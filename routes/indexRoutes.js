@@ -34,10 +34,10 @@ router.get(
         return next(new AppError('No document with that ID', 404));
       }
 
-      res.status(200).json({ status: 'success', data: { doc } });
-      // render('article', {
-      //   articleList: doc,
-      // });
+      res.status(200).render('article', {
+        article: doc,
+      });
+      // json({ status: 'success', data: { doc } })
     });
   })
 );

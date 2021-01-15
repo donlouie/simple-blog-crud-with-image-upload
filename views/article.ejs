@@ -1,0 +1,26 @@
+<%- include("partials/header.ejs"); -%>
+<!-- Article Section -->
+<div id="article-section">
+  <div id="article-card">
+    <img
+      class="cover img-fluid img-responsive img-fit"
+      src="data:image/<%=article.imageCover.contentType%>;base64, 
+   <%=article.imageCover.data.toString('base64')%>"
+    />
+    <div class="container">
+      <div>
+        <h1><%= article.articleTitle %></h1>
+      </div>
+      <h6>
+        <i class="fas fa-feather"></i> <%= article.articleAuthor %>&nbsp;
+        <i class="far fa-calendar-alt"></i> <%=
+        article.publishedAt.toDateString() %>
+      </h6>
+      <div class>
+        <p><%= article.articleContent %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Article Section -->
+<%- include("partials/footer.ejs"); -%>
