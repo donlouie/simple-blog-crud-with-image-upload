@@ -57,6 +57,7 @@ router.post(
     };
     const doc = await Article.create(article);
 
+    req.flash('success_msg', 'Article Added Successfully!');
     res.status(201).redirect('/api/articles');
     // json({
     //   status: 'success',
@@ -77,6 +78,7 @@ router.post(
       return next(new AppError('No document found with that ID', 404));
     }
 
+    req.flash('success_msg', 'Article Deleted Successfully!');
     res.status(204).redirect('/api/articles');
     // json({
     //   status: 'success',
