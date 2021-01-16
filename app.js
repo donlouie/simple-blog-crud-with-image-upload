@@ -4,13 +4,14 @@ const bodyParser = require('body-parser');
 const AppError = require('./utils/appError');
 const indexRouter = require('./routes/indexRoutes');
 const articleRouter = require('./routes/articleRoutes');
+const userRouter = require('./routes/userRoutes');
 
-// Authentication Modules
-const flash = require("connect-flash");
-const session = require("express-session");
-const passport = require("passport");
-// Passport config
-require("./config/passport")(passport);
+//* Authentication modules
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
+//* Passport config
+require('./config/passport')(passport);
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
-// Express session
+//* Express session
 app.use(
   session({
     secret: 'secret',
@@ -28,14 +29,14 @@ app.use(
   })
 );
 
-// Passport middleware
+//* Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Connect flash
+//* Connect flash
 app.use(flash());
 
-// Global Vars
+//* Global vars
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -43,9 +44,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// routes
+//* Routes
 app.use('/', indexRouter);
 app.use('/api/articles', articleRouter);
+app.use('/users', userRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 
-const Article = require('../models/articleModel');
-
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const AppError = require('../utils/appError');
 
-//* multer storage
+//* Article model
+const Article = require('../models/articleModel');
+
+//* Multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'public/uploads');
@@ -21,22 +22,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-//* render article management route
-router.get(
-  '/',
-  catchAsync(async (req, res, next) => {
-    await Article.find({}, (err, doc) => {
-      if (!doc) {
-        return next(new AppError('No documents found in the database', 404));
-      }
-
-      res.status(200).render('manage', { articleList: doc });
-      // console.log(doc);
-    });
-  })
-);
-
-//* add article
+//* Create Handle
 router.post(
   '/create',
   upload.fields([{ name: 'image', maxCount: 1 }]),
@@ -58,7 +44,7 @@ router.post(
     const doc = await Article.create(article);
 
     req.flash('success_msg', 'Article Added Successfully!');
-    res.status(201).redirect('/api/articles');
+    res.status(201).redirect('/manage-articles');
     // json({
     //   status: 'success',
     //   data: {
@@ -68,7 +54,7 @@ router.post(
   })
 );
 
-//* delete article
+//* Delete Handle
 router.post(
   '/delete',
   catchAsync(async (req, res, next) => {
@@ -79,7 +65,7 @@ router.post(
     }
 
     req.flash('success_msg', 'Article Deleted Successfully!');
-    res.status(204).redirect('/api/articles');
+    res.status(204).redirect('/manage-articles');
     // json({
     //   status: 'success',
     //   data: null,

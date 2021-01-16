@@ -3,9 +3,13 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
+//* Page Authenticaiton
+const { ensureAuthenticated } = require('../config/auth');
+
+//* Article Model
 const Article = require('../models/articleModel');
 
-//* render index route, display index.js ejs template
+//* Home Page / Login
 //? Why do we live just to suffer?
 router.get(
   '/',
@@ -21,7 +25,7 @@ router.get(
   })
 );
 
-//* generate path for each article
+//* Article Page
 router.get(
   '/t/:articleId',
   catchAsync(async (req, res, next) => {
@@ -36,6 +40,22 @@ router.get(
         article: doc,
       });
       // json({ status: 'success', data: { doc } })
+    });
+  })
+);
+
+//* Article Management Page
+router.get(
+  '/manage-articles',
+  ensureAuthenticated,
+  catchAsync(async (req, res, next) => {
+    await Article.find({}, (err, doc) => {
+      if (!doc) {
+        return next(new AppError('No documents found in the database', 404));
+      }
+
+      res.status(200).render('manage', { articleList: doc });
+      // console.log(doc);
     });
   })
 );
