@@ -4,8 +4,7 @@
 
 ## ❔ About
 
-Just a simple blog website where you can read and manage articles created on the admin panel.
-//Site currently unfinished
+Just a simple blog website where you can read and manage articles created on the admin panel. To add and delete articles create an account and login to access the management panel.
 
 ## 🏗️ Built With
 
