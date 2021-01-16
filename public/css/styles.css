@@ -1,9 +1,21 @@
-.navbar-brand {
-  font-family: 'Montserrat', sans-serif;
+/* Font Families */
+/* font-family: 'Alfa Slab One', cursive; */
+/* font-family: 'Roboto Condensed', sans-serif; */
+/* font-family: 'Cabin', sans-serif; */
+/* font-family: 'Roboto Condensed', sans-serif; */
+/* font-family: 'Overpass', sans-serif; */
+body {
+  background-color: rgb(245, 245, 245);
+  color: rgb(39, 39, 39);
+  font-family: 'Overpass', sans-serif;
 }
 
-.nav-item {
-  font-family: 'Archivo Black', sans-serif;
+a {
+  color: rgb(0, 0, 0);
+}
+
+h6 {
+  color: rgb(97, 97, 97);
 }
 
 #section {
@@ -13,20 +25,25 @@
   margin: 0px 290px 45px 290px;
 }
 
-h1 {
-  font-family: 'Playfair Display', serif;
+.navbar-brand {
+  font-family: 'Alfa Slab One', cursive;
 }
 
-h6 {
-  color: rgb(170, 170, 170);
+.nav-item {
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.card-body {
+  background-color: rgb(148, 148, 148);
 }
 
-p {
-  font-family: 'Chivo', sans-serif;
+.article-title {
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
-a {
-  color: rgb(0, 0, 0);
+.article-content {
+  font-family: 'Cabin', sans-serif;
 }
 
 .fit-image {

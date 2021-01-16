@@ -19,6 +19,8 @@ Just a simple blog website where you can read and manage articles created on the
 
 ## 🔍 Website Preview
 
+![Imgur](https://i.imgur.com/dFm5cZh.png)
+
 ## Website Features
 
 Content Management
