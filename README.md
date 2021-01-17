@@ -20,7 +20,7 @@ Just a simple blog website where you can read and manage articles created on the
 
 ![Imgur](https://i.imgur.com/dFm5cZh.png)
 
-## Website Features
+## 📝️ Website Features
 
 Content Management
 
