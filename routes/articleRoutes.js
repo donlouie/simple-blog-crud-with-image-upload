@@ -22,54 +22,57 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-//* Create Handle
+//* @route   POST api/posts/create
+//* @desc    Create post
+//* @access  Private
 router.post(
   '/create',
   upload.fields([{ name: 'image', maxCount: 1 }]),
   catchAsync(async (req, res, next) => {
-    const article = {
-      articleAuthor: req.body.author,
-      articleTitle: req.body.title,
-      articleContent: req.body.content,
-      imageCover: {
-        data: fs.readFileSync(
-          path.join(
-            __dirname + '/../public/uploads/' + req.files['image'][0].filename
-          )
-        ),
-        //? why is contentType not showing on mongoDB json object
-        contentType: 'image',
-      },
-    };
-    const doc = await Article.create(article);
+    try {
+      const article = {
+        articleAuthor: req.body.author,
+        articleTitle: req.body.title,
+        articleContent: req.body.content,
+        imageCover: {
+          data: fs.readFileSync(
+            path.join(
+              __dirname + '/../public/uploads/' + req.files['image'][0].filename
+            )
+          ),
+          //? why is contentType not showing on mongoDB json object
+          contentType: 'image',
+        },
+      };
 
-    req.flash('success_msg', 'Article Added Successfully!');
-    res.status(201).redirect('/manage-articles');
-    // json({
-    //   status: 'success',
-    //   data: {
-    //     data: doc,
-    //   },
-    // });
+      const doc = await Article.create(article);
+      req.flash('success_msg', 'Article Added Successfully!');
+      res.status(201).redirect('/manage-articles');
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
   })
 );
 
-//* Delete Handle
+//* @route   POST api/posts/delete
+//* @desc    Delete post
+//* @access  Private
 router.post(
   '/delete',
   catchAsync(async (req, res, next) => {
-    const doc = await Article.findByIdAndRemove(req.body.delbutton);
+    try {
+      const doc = await Article.findByIdAndRemove(req.body.delbutton);
 
-    if (!doc) {
-      return next(new AppError('No document found with that ID', 404));
-    }
+      if (!doc) {
+        return next(new AppError('No document found with that ID', 404));
+      }
 
-    req.flash('success_msg', 'Article Deleted Successfully!');
-    res.status(204).redirect('/manage-articles');
-    // json({
-    //   status: 'success',
-    //   data: null,
-    // });
+      req.flash('success_msg', 'Article Deleted Successfully!');
+      res.status(204).redirect('/manage-articles');
+    } catch (err) {}
+    console.error(err.message);
+    res.status(500).send('Server Error');
   })
 );
 
