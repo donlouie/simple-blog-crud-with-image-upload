@@ -69,7 +69,10 @@ router.get(
           return next(new AppError('No documents found in the database', 404));
         }
 
-        res.status(200).render('manage', { articleList: doc });
+        res.status(200).render('manage', {
+          articleList: doc,
+          user: req.user,
+        });
       });
     } catch (err) {
       console.error(err.message);

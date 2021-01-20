@@ -1,50 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Admin Panel</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <!-- Fontawesome Icon CDN -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
-      crossorigin="anonymous"
-    />
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-      crossorigin="anonymous"
-    />
-    <!-- User CSS -->
-    <link href="/css/styles.css" rel="stylesheet" />
-    <!-- Googlefonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Cabin:wght@500&family=Overpass&family=Roboto&family=Roboto+Condensed:wght@700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <!-- Navbar  -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
-        <form action="/users/logout">
-          <button type="submit" class="nav-item btn btn-outline-dark">
-            Logout
-          </button>
-        </form>
-      </div>
-    </nav>
-    <!-- /Navbar -->
+<%- include("partials/header.ejs"); -%>
 <%- include('partials/messages.ejs') %>
 <!-- Add Article -->
+<p class="lead mb-3">Welcome <%= user.name %></p>
 <div id="section" class="container">
  <div class="card-body">
   <form

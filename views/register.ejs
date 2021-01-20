@@ -4,7 +4,7 @@
     <div class="card card-body">
       <p><i class="fas fa-sign-in-alt"></i> Create Account</p>
       <%- include('partials/messages.ejs') %>
-      <form action="/users/register" method="POST">
+      <form action="/users/register" method="POST" autocomplete="off">
         <div class="form-group">
           <label for="name">Name</label>
           <input

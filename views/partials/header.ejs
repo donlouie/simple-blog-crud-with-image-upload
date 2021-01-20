@@ -62,11 +62,19 @@
             </li>
           </ul>
         </div>
+        <% if (!locals.user) { %>
         <form action="/users/login">
           <button type="submit" class="nav-item btn btn-outline-dark">
             Login
           </button>
         </form>
+        <% } else { %>
+        <form action="/users/logout">
+          <button type="submit" class="nav-item btn btn-outline-dark">
+            Logout
+          </button>
+        </form>
+        <% } %>
       </div>
     </nav>
     <!-- /Navbar -->
