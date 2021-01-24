@@ -30,7 +30,6 @@ Content Management
 User Authentication
 
 -Passportjs & Bcrypt
-//followed bradtraversy's authentication
 
 ## Installing
 
