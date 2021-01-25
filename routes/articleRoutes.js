@@ -1,14 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const catchAsync = require('../utils/catchAsync');
 
-const fs = require('fs');
-const path = require('path');
 const multer = require('multer');
-const AppError = require('../utils/appError');
 
-//* Article model
-const Article = require('../models/articleModel');
+const articleController = require('../controllers/articleController');
 
 //* Multer storage
 const storage = multer.diskStorage({
@@ -22,58 +17,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-//* @route   POST api/posts/create
+//* @route   POST api/articles/create
 //* @desc    Create post
 //* @access  Private
 router.post(
   '/create',
   upload.fields([{ name: 'image', maxCount: 1 }]),
-  catchAsync(async (req, res, next) => {
-    try {
-      const article = {
-        articleAuthor: req.body.author,
-        articleTitle: req.body.title,
-        articleContent: req.body.content,
-        imageCover: {
-          data: fs.readFileSync(
-            path.join(
-              __dirname + '/../public/uploads/' + req.files['image'][0].filename
-            )
-          ),
-          //? why is contentType not showing on mongoDB json object
-          contentType: 'image',
-        },
-      };
-
-      const doc = await Article.create(article);
-      req.flash('success_msg', 'Article Added Successfully!');
-      res.status(201).redirect('/manage-articles');
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
-    }
-  })
+  articleController.createArticle
 );
 
-//* @route   POST api/posts/delete
+//* @route   POST api/articles/delete
 //* @desc    Delete post
 //* @access  Private
-router.post(
-  '/delete',
-  catchAsync(async (req, res, next) => {
-    try {
-      const doc = await Article.findByIdAndRemove(req.body.delbutton);
-
-      if (!doc) {
-        return next(new AppError('No document found with that ID', 404));
-      }
-
-      req.flash('success_msg', 'Article Deleted Successfully!');
-      res.status(204).redirect('/manage-articles');
-    } catch (err) {}
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  })
-);
+router.post('/delete', articleController.deleteArticle);
 
 module.exports = router;
