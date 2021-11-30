@@ -1,10 +1,10 @@
 # mongodb-nodejs-express-blogsite
 
-📰 Simple blog website
+📰 MongoDB Blog CRUD with Image upload
 
 ## ❔ About
 
-Just a simple blog website where you can read and manage articles created on the admin panel. To add and delete articles create an account and login to access the management panel.
+Blog CRUD with image upload using Multer, User creation and authentication, Admin dashboard for management of blog articles.
 
 ## 🏗️ Built With
 
@@ -25,11 +25,9 @@ Just a simple blog website where you can read and manage articles created on the
 Content Management
 
 - Create, Read, Update, Delete content
-- Manage Blog Articles
-
-User Authentication
-
--Passportjs & Bcrypt
+- Image upload using Multer
+- User Authenticaiton
+- Admin Dashboard: Manage Blog Articles
 
 ## Installing
 
@@ -49,9 +47,14 @@ npm start
 
 ## Deployment
 
-For the website to work. You would need to provide your own MongoDB URI.
+Fill up the specified details in the <config copy.env> file.
+-rename said file to <config.env> for it to work.
 
-In this project I created a config.env file that contained my database key
+To start the app
+
+```
+node server.js
+```
 
 ## 🧔 Authors
 
