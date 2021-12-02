@@ -4,7 +4,7 @@
 
 ## ❔ About
 
-Blog CRUD with image upload using Multer, User creation and authentication, Admin dashboard for management of blog articles.
+Blog CRUD with image upload using Multer local storage, User creation and authentication, Admin dashboard for management of blog articles.
 
 ## 🏗️ Built With
 
