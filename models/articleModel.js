@@ -15,10 +15,14 @@ const articleSchema = new mongoose.Schema({
     required: [true, 'Article must have a content'],
   },
   imageCover: {
-    data: Buffer,
-    contetType: String,
+    type: String,
+    required: true,
   },
-  publishedAt: { type: Date, default: Date.now },
+  // imageCover: {
+  //   data: Buffer,
+  //   contetType: String,
+  // },
+  publishedAt: { type: Date, default: Date.now, required: true },
 });
 
 const Article = mongoose.model('Article', articleSchema);
