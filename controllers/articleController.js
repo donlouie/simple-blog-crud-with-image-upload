@@ -18,7 +18,6 @@ const Article = require('../models/articleModel');
 //   },
 // });
 
-
 const upload = multer({ storage: storage });
 
 exports.createArticle = catchAsync(async (req, res, next) => {

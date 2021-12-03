@@ -1,7 +1,6 @@
 /node_modules
 public/uploads/*
+# Ignore uploads folder and all subfolders except .gitkeep on root level
+uploads/*
 !public/uploads/.gitkeep
-# Ignore uploads folder and all subfolders except .gitkeep
-!uploads/.gitkeep
-
 config.env
