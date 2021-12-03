@@ -17,8 +17,17 @@ const Article = require('../models/articleModel');
 //     cb(null, file.fieldname + '-' + Date.now());
 //   },
 // });
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '_' + Date.now() + '_' + file.originalname);
+  },
+});
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
+var upload = multer({ storage: storage }).single('image');
 
 exports.createArticle = catchAsync(async (req, res, next) => {
   try {
@@ -26,15 +35,16 @@ exports.createArticle = catchAsync(async (req, res, next) => {
       articleAuthor: req.body.author,
       articleTitle: req.body.title,
       articleContent: req.body.content,
-      imageCover: {
-        data: fs.readFileSync(
-          path.join(
-            __dirname + '/../public/uploads/' + req.files['image'][0].filename
-          )
-        ),
-        //? why is contentType not showing on mongoDB json object
-        contentType: 'image',
-      },
+      imageCover: req.file.filename,
+      // imageCover: {
+      //   data: fs.readFileSync(
+      //     path.join(
+      //       __dirname + '/../public/uploads/' + req.files['image'][0].filename
+      //     )
+      //   ),
+      //   //? why is contentType not showing on mongoDB json object
+      //   contentType: 'image',
+      // },
     };
 
     const doc = await Article.create(article);
