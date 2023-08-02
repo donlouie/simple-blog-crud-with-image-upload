@@ -1,10 +1,6 @@
-# mongodb-nodejs-express-blogsite
-
-📰 MongoDB Blog CRUD with Image upload
-
 ## ❔ About
 
-Blog with CRUD & Multer Local Storage for Image Upload.
+Simple blog built using Nodejs, MongoDB, EJS and Multer for image local upload.
 
 ## 🏗️ Built With
 
